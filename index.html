@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Shoes E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+header {
+    display: flex;
+    justify-content: center; /* Center everything horizontally */
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position .actions absolutely */
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+header .actions {
+    position: absolute; /* Place it independently from the logo */
+    right: 20px; /* Align it to the right of the header */
+    display: flex;
+    gap: 5px;
+}
+        header .actions img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        header .actions img:hover {
+            transform: scale(1.2);
+        }
+nav {
+  background-color: #333;
+  padding: 10px 0;
+  text-align: center;
+  position: relative; /* Necessary for dropdown positioning */
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Ensures menu items are in one line */
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul li {
+  position: relative; /* For dropdown positioning */
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 15px; /* Adds padding for clickable area */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #e74c3c;
+}
+
+nav ul li .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the parent menu */
+  left: 0;
+  background-color: #444; /* Matches overall design */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 5px 0; /* Adds spacing inside dropdown */
+  margin: 0;
+  z-index: 1000;
+  border-radius: 5px; /* Smooth edges */
+}
+
+nav ul li .dropdown li {
+  width: 180px; /* Adjust for consistent dropdown size */
+}
+
+nav ul li .dropdown li a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  color: white;
+  background-color: #444; /* Matches dropdown background */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li:hover .dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+nav ul li .dropdown li a:hover {
+  background-color: #555; /* Slightly lighter for hover effect */
+  color: #e74c3c;
+}
+
+
+        .header-slider {
+            position: relative;
+            overflow: hidden;
+            height: 400px; /* Set a specific height to make sure it fits */
+            margin-top: 0px; /* Adds space between the header and the slider */
+        }
+
+        .header-slider img {
+            width: 100%;
+            height: 100%; /* Ensure the image takes up the full height of the slider */
+            object-fit: cover;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .header-slider img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Promotion Banner */
+        .promotion {
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin-top: 20px;
+        }
+
+        .promotion img {
+            width: 100%;
+            height: auto;
+            max-height: 400px; /* Restoring promotion banner size */
+            object-fit: contain;
+        }
+
+    .bestseller-products {
+        padding: 20px;
+        background-color: #f4f4f4;
+        margin: 20px 0;
+    }
+
+    .bestseller-products h2 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .bestseller-slider {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 10px;
+        scroll-behavior: smooth;
+    }
+
+    .bestseller-product {
+        flex: 0 0 auto;
+        width: 250px; /* Fixed width for each product card */
+        text-align: center;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .bestseller-product:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .bestseller-product img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .bestseller-product p {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .bestseller-product .description {
+        font-size: 14px;
+        color: #777;
+    }
+
+    .bestseller-product {
+        text-align: center;
+        padding: 20px;
+    }
+
+.bestseller-product button {
+    padding: 5px; /* Adjusts padding around buttons */
+}
+
+.bestseller-product button img {
+    width: 20px;  /* Make the button images smaller */
+    height: auto;  /* Maintain aspect ratio */
+}
+
+
+    /* Optional: Hide scroll bar for the horizontal slider */
+    .bestseller-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+        .brands {
+            padding: 20px;
+            text-align: center;
+        }
+        .brands img {
+            width: 150px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .brands img:hover {
+            transform: scale(1.2);
+        }
+
+        .info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+        }
+        .info div {
+            margin-bottom: 10px;
+        }
+
+    /* Style for the actions div to hold the items in line */
+    .actions {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Container for the cart icon and the count */
+    .cart-container {
+        position: relative;
+    }
+
+    /* Style for the cart count */
+    .cart-count {
+        position: absolute;
+        top:-15px; /* Adjust top for positioning */
+        right: 30px; /* Adjust right for positioning */
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 14px;
+        width: 10px;
+        height: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .floating-buttons a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .floating-buttons a:hover {
+            transform: scale(1.1);
+        }
+
+
+footer {
+    background-color: #f4f4f4;
+    padding: 20px 40px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    cursor: pointer;
+    margin: 5px 0;
+    font-size: 14px;
+    color: #000;
+}
+
+.footer-section .answer {
+    display: none;
+    margin-left: 15px;
+    font-size: 13px;
+    color: #555;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-bottom a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.payment-methods img {
+    width: 40px;
+    height: auto;
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="image/logo2.svg" alt="SportShoes Logo" style="width: 100px; height: auto;">
+    </div>
+    <div class="actions">
+        <!-- Search Button -->
+        <img src="image/6.svg" alt="Search" onclick="alert('Search functionality coming soon!')">
+
+        <!-- Cart Button with Item Count -->
+        <a href="cart.html">
+            <img src="image/5.svg" alt="Cart" id="cartButton">
+            <span id="cartCount" class="cart-count">0</span>
+        </a>
+
+        <!-- Like Button -->
+        <img src="image/7.svg" alt="Like" id="likeButton">
+    </div>
+</header>
+
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown-menu">
+      <a href="product.html">Products</a> <!-- Link to the product page -->
+      <ul class="dropdown">
+        <li><a href="product.html#asics">Asics</a></li>
+        <li><a href="product.html#puma">Puma</a></li>
+        <li><a href="product.html#newbalance">New Balance</a></li>
+        <li><a href="product.html#lacoste">Lacoste</a></li>
+        <li><a href="product.html#skechers">Skechers</a></li>
+      </ul>
+    </li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+</nav>
+
+
+<div class="header-slider">
+    <img src="image/4.svg" alt="Header 1" class="active">
+    <img src="image/2.svg" alt="Header 2">
+    <img src="image/3.svg" alt="Header 3">
+</div>
+
+<div class="promotion">
+    <p><h2>Don’t miss our exclusive promotions! Grab your favorites now!</h2></p>
+    <img src="image/1.svg" alt="Exclusive Promotion">
+</div>
+
+<!-- Bestseller Products Section -->
+<div class="bestseller-products">
+    <h2><b>OUR BESTSELLER PRODUCTS</b></h2>
+    <div class="bestseller-slider">
+        <div class="bestseller-product">
+            <img src="image/18.svg" alt="Bestseller Model 1">
+            <p>Bestseller Model 1 - $120</p>
+            <p class="description">Top-rated for performance and comfort.</p>
+            <button class="add-to-cart" onclick="addToCart()">
+                <img src="image/5.svg" alt="Add to Cart">
+            </button>
+            <button class="like-button" onclick="alert('Add to favourite <3')">
+                <img src="image/7.svg" alt="Like">
+            </button>
+        </div>
+
+        <div class="bestseller-product">
+            <img src="image/19.svg" alt="Bestseller Model 2">
+            <p>Bestseller Model 2 - $140</p>
+            <p class="description">Stylish and lightweight for everyday use.</p>
+<button class="add-to-cart" onclick="addToCart('Bestseller Model 2', 140)">
+    <img src="image/5.svg" alt="Add to Cart">
+</button>
+
+            <button class="like-button" onclick="alert('Add to favourite <3')">
+                <img src="image/7.svg" alt="Like">
+            </button>
+        </div>
+
+        <div class="bestseller-product">
+            <img src="image/20.svg" alt="Bestseller Model 3">
+            <p>Bestseller Model 3 - $160</p>
+            <p class="description">Durable and trendy, perfect for workouts.</p>
+<button class="add-to-cart" onclick="addToCart('Bestseller Model 3', 160)">
+    <img src="image/5.svg" alt="Add to Cart">
+</button>
+            <button class="like-button" onclick="alert('Add to favourite <3')">
+                <img src="image/7.svg" alt="Like">
+            </button>
+        </div>
+
+        <div class="bestseller-product">
+            <img src="image/21.svg" alt="Bestseller Model 4">
+            <p>Bestseller Model 4 - $170</p>
+            <p class="description">Durable and trendy, perfect for workouts.</p>
+<button class="add-to-cart" onclick="addToCart('Bestseller Model 4', 160)">
+    <img src="image/5.svg" alt="Add to Cart">
+</button>
+            <button class="like-button" onclick="alert('Add to favourite <3')">
+                <img src="image/7.svg" alt="Like">
+            </button>
+        </div>
+
+        <div class="bestseller-product">
+            <img src="image/22.svg" alt="Bestseller Model 3">
+            <p>Bestseller Model 5 - $160</p>
+            <p class="description">Durable and trendy, perfect for workouts.</p>
+<button class="add-to-cart" onclick="addToCart('Bestseller Model 5', 160)">
+    <img src="image/5.svg" alt="Add to Cart">
+</button>
+            <button class="like-button" onclick="alert('Add to favourite <3')">
+                <img src="image/7.svg" alt="Like">
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="brands">
+    <img src="image/11.svg" alt="Asics" onclick="location.href='product.html#asics'">
+    <img src="image/12.svg" alt="Puma" onclick="location.href='product.html#puma'">
+    <img src="image/13.svg" alt="New Balance" onclick="location.href='product.html#newbalance'">
+    <img src="image/14.svg" alt="Lacoste" onclick="location.href='product.html#lacoste'">
+    <img src="image/15.svg" alt="Skechers" onclick="location.href='product.html#skechers'">
+</div>
+
+<div class="floating-buttons">
+    <a href="https://wa.me/601133354019" target="_blank" title="Contact Us on WhatsApp">💬</a>
+    <a href="mailto:qyha517@gmail.com" target="_blank" title="Email Us">✉️</a>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Shopping with KICKX</h4>
+            <p onclick="toggleAnswer(this)">How Do I Buy?</p>
+            <p class="answer">To buy, add items to your cart and proceed to checkout.</p>
+            <p onclick="toggleAnswer(this)">Delivery & Charges</p>
+            <p class="answer">We deliver within 3-5 business days. Charges may vary.</p>
+            <p onclick="toggleAnswer(this)">Size Guides</p>
+            <p class="answer">Refer to our size chart for detailed measurements.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Care</h4>
+            <p onclick="toggleAnswer(this)">Returns & Exchange</p>
+            <p class="answer">Items can be returned within 30 days of purchase.</p>
+            <p onclick="toggleAnswer(this)">Contact Us</p>
+            <p class="answer">Reach us via email or phone for support.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <p onclick="toggleAnswer(this)">Terms & Conditions</p>
+            <p class="answer">Review our terms and conditions for purchases.</p>
+            <p onclick="toggleAnswer(this)">Privacy & Cookies</p>
+            <p class="answer">Learn how we handle your data and cookies.</p>
+            <p onclick="toggleAnswer(this)">Accessibility</p>
+            <p class="answer">Our commitment to accessible services.</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright © 2025 KICKX Sdn Bhd. All rights reserved.</p>
+        <div class="payment-methods">
+            <span>We accept the following payment methods:</span>
+            <img src="image/16.svg" alt="Visa">
+            <img src="image/17.svg" alt="Mastercard">
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    let activeIndex = 0;
+    const images = document.querySelectorAll('.header-slider img');
+    
+    function changeImage() {
+        images[activeIndex].classList.remove('active');
+        activeIndex = (activeIndex + 1) % images.length;
+        images[activeIndex].classList.add('active');
+    }
+    
+    setInterval(changeImage, 3000); // Change image every 3 seconds
+
+    function addToCart(productName) {
+        cartCount++;  // Increment the cart count
+        document.getElementById('cartCount').textContent = cartCount;  // Update cart count in the header
+        alert('Item has been added to cart!');    }
+
+    function addToFavorites(productName) {
+        // Your favorite functionality
+        console.log(productName + " added to favorites!");
+    }
+
+     let cartCount = 0;  // Initialize cart count variable
+
+    // Function to add items to the cart and update the cart count
+// Function to add item to cart and show an alert
+function addToCart(itemName, itemPrice) {
+    // You can store the cart items in an array or any other method
+    console.log(`${itemName} has been added to the cart for $${itemPrice}`);
+
+    // Show an alert to the user when the item is added
+    alert(`${itemName} has been added to your cart!`);
+}
+
+
+// Initialize an empty cart array
+let cart = [];
+
+function addToCart(itemName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Check if the item already exists in the cart
+    const existingItem = cart.find(item => item.itemName === itemName);
+    
+    if (existingItem) {
+        // Increase the quantity if the item is already in the cart
+        existingItem.quantity += 1;
+    } else {
+        // Add new item to the cart
+        cart.push({
+            itemName: itemName, // Ensure this is correctly defined
+            price: price,
+            quantity: 1
+        });
+    }
+    
+    // Save the updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update cart count
+    updateCartCount();
+}
+
+
+  // Function to update the cart count displayed
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById('cartCount').innerText = cartCount;
+  }
+
+  // Run this function when the page loads to set the initial cart count
+  window.onload = updateCartCount;
+
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+    } else {
+        answer.style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>
+
+
+

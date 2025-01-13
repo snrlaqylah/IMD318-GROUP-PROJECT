@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Shoes E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+header {
+    display: flex;
+    justify-content: center; /* Center everything horizontally */
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position .actions absolutely */
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+header .actions {
+    position: absolute; /* Place it independently from the logo */
+    right: 20px; /* Align it to the right of the header */
+    display: flex;
+    gap: 5px;
+}
+        header .actions img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        header .actions img:hover {
+            transform: scale(1.2);
+        }
+nav {
+  background-color: #333;
+  padding: 10px 0;
+  text-align: center;
+  position: relative; /* Necessary for dropdown positioning */
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Ensures menu items are in one line */
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul li {
+  position: relative; /* For dropdown positioning */
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 15px; /* Adds padding for clickable area */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #e74c3c;
+}
+
+nav ul li .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the parent menu */
+  left: 0;
+  background-color: #444; /* Matches overall design */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 5px 0; /* Adds spacing inside dropdown */
+  margin: 0;
+  z-index: 1000;
+  border-radius: 5px; /* Smooth edges */
+}
+
+nav ul li .dropdown li {
+  width: 180px; /* Adjust for consistent dropdown size */
+}
+
+nav ul li .dropdown li a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  color: white;
+  background-color: #444; /* Matches dropdown background */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li:hover .dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+nav ul li .dropdown li a:hover {
+  background-color: #555; /* Slightly lighter for hover effect */
+  color: #e74c3c;
+}
+
+
+        .header-slider {
+            position: relative;
+            overflow: hidden;
+            height: 400px; /* Set a specific height to make sure it fits */
+            margin-top: 0px; /* Adds space between the header and the slider */
+        }
+
+        .header-slider img {
+            width: 100%;
+            height: 100%; /* Ensure the image takes up the full height of the slider */
+            object-fit: cover;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .header-slider img.active {
+            display: block;
+            opacity: 1;
+        }
+
+    /* Style for the actions div to hold the items in line */
+    .actions {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Container for the cart icon and the count */
+    .cart-container {
+        position: relative;
+    }
+
+    /* Style for the cart count */
+    .cart-count {
+        position: absolute;
+        top:-15px; /* Adjust top for positioning */
+        right: 30px; /* Adjust right for positioning */
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 14px;
+        width: 10px;
+        height: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Ensures all content is centered by default */
+}
+
+/* About section */
+.about-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center; /* Centers text inside the container */
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column; /* Stacks content vertically */
+    align-items: center; /* Centers content horizontally */
+    gap: 20px;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+.about-text h2, .about-text p {
+    text-align: center;
+}
+
+/* History section */
+.history-section {
+    background-color: #f9f9f9;
+    padding: 40px 20px;
+    text-align: justify; /* Centers the entire section */
+}
+
+.history-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    text-align: center; /* Centers text inside the container */
+}
+
+/* Founder section */
+.founder-section {
+    display: flex;
+    flex-direction: column; /* Stacks content vertically */
+    align-items: center; /* Centers content horizontally */
+    padding: 40px 20px;
+    gap: 20px;
+    text-align: center;
+}
+
+.founder-section img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.founder-text {
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Mission section */
+.mission-section {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #e74c3c, #f39c12);
+    color: #fff;
+    text-align: center; /* Centers the entire section */
+}
+
+.mission-section p {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+footer {
+    background-color: #f4f4f4;
+    padding: 20px 40px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    cursor: pointer;
+    margin: 5px 0;
+    font-size: 14px;
+    color: #000;
+}
+
+.footer-section .answer {
+    display: none;
+    margin-left: 15px;
+    font-size: 13px;
+    color: #555;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-bottom a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.payment-methods img {
+    width: 40px;
+    height: auto;
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="image/logo2.svg" alt="SportShoes Logo" style="width: 100px; height: auto;">
+    </div>
+    <div class="actions">
+        <!-- Search Button -->
+        <img src="image/6.svg" alt="Search" onclick="alert('Search functionality coming soon!')">
+
+        <!-- Cart Button with Item Count -->
+        <a href="cart.html">
+            <img src="image/5.svg" alt="Cart" id="cartButton">
+            <span id="cartCount" class="cart-count">0</span>
+        </a>
+
+        <!-- Like Button -->
+        <img src="image/7.svg" alt="Like" id="likeButton">
+    </div>
+</header>
+
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown-menu">
+      <a href="product.html">Products</a> <!-- Link to the product page -->
+      <ul class="dropdown">
+        <li><a href="product.html#asics">Asics</a></li>
+        <li><a href="product.html#puma">Puma</a></li>
+        <li><a href="product.html#newbalance">New Balance</a></li>
+        <li><a href="product.html#lacoste">Lacoste</a></li>
+        <li><a href="product.html#skechers">Skechers</a></li>
+      </ul>
+    </li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+</nav>
+
+
+<div class="header-slider">
+    <img src="image/kickx.svg" alt="Header 1" class="active">
+</div>
+
+<div class="about-container">
+    <div class="about-header">
+        <h1><i>ABOUT US</i></h1>
+        <p>At KickX, we’re more than just a sneaker brand – we’re a movement. Our mission is to bring together style, comfort, and innovation in every pair we create. Whether you're hitting the streets or just lounging, we design sneakers that fit seamlessly into your lifestyle. With a focus on quality materials, cutting-edge designs, and sustainable practices, KickX is dedicated to delivering footwear that makes you feel as good as it looks. We believe sneakers are more than just shoes; they’re a statement, a culture, and a way to express your individuality. Join the KickX family and step into a new era of sneaker culture.</p>
+    </div>
+</div>
+
+
+<div class="founder-section">
+    <img src="image/founder.jpg" alt="Our Founder">
+    <div class="founder-text">
+        <h2><i>About Our Founder</i></h2>
+        <p>Afiq Syahmi, Nurul Aqilah, Aqil Izz, Sarah Farina, and Dayana Alia founded Sport Shoes E-commerce to bridge the gap between performance and comfort. Their passion for innovation led the company to great heights.</p>
+    </div>
+</div>
+
+<div class="mission-section">
+    <h2>Our Mission</h2>
+    <p>Connecting sneaker lovers with authentic, stylish shoes and exceptional service.</p>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Shopping with KICKX</h4>
+            <p onclick="toggleAnswer(this)">How Do I Buy?</p>
+            <p class="answer">To buy, add items to your cart and proceed to checkout.</p>
+            <p onclick="toggleAnswer(this)">Delivery & Charges</p>
+            <p class="answer">We deliver within 3-5 business days. Charges may vary.</p>
+            <p onclick="toggleAnswer(this)">Size Guides</p>
+            <p class="answer">Refer to our size chart for detailed measurements.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Care</h4>
+            <p onclick="toggleAnswer(this)">Returns & Exchange</p>
+            <p class="answer">Items can be returned within 30 days of purchase.</p>
+            <p onclick="toggleAnswer(this)">Contact Us</p>
+            <p class="answer">Reach us via email or phone for support.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <p onclick="toggleAnswer(this)">Terms & Conditions</p>
+            <p class="answer">Review our terms and conditions for purchases.</p>
+            <p onclick="toggleAnswer(this)">Privacy & Cookies</p>
+            <p class="answer">Learn how we handle your data and cookies.</p>
+            <p onclick="toggleAnswer(this)">Accessibility</p>
+            <p class="answer">Our commitment to accessible services.</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright © 2025 KICKX Sdn Bhd. All rights reserved.</p>
+        <div class="payment-methods">
+            <span>We accept the following payment methods:</span>
+            <img src="image/16.svg" alt="Visa">
+            <img src="image/17.svg" alt="Mastercard">
+        </div>
+    </div>
+</footer>
+
+
+<script>
+
+    let activeIndex = 0;
+    const images = document.querySelectorAll('.header-slider img');
+    
+    function changeImage() {
+        images[activeIndex].classList.remove('active');
+        activeIndex = (activeIndex + 1) % images.length;
+        images[activeIndex].classList.add('active');
+    }
+    
+    setInterval(changeImage, 3000); // Change image every 3 seconds
+
+    function addToCart(product) {
+        alert(product + ' added to cart!');
+    }
+
+    let cartCount = 0;
+
+    // Function to add an item to the cart and update the count
+    function addToCart() {
+        cartCount++;  // Increment the cart count
+        document.getElementById("cartCount").innerText = cartCount; // Update the count next to the cart icon
+    }
+
+
+    function addToFavorites(product) {
+        alert(product + ' added to favorites!');
+    }
+
+     let cartCount = 0;  // Initialize cart count variable
+
+    // Function to add items to the cart and update the cart count
+    function addToCart() {
+        cartCount++;  // Increment the cart count
+        document.getElementById('cartCount').textContent = cartCount;  // Update cart count in the header
+        alert('Item has been added to cart!');
+    }
+
+// Initialize an empty cart array
+let cart = [];
+
+function addToCart(itemName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Check if the item already exists in the cart
+    const existingItem = cart.find(item => item.itemName === itemName);
+    
+    if (existingItem) {
+        // Increase the quantity if the item is already in the cart
+        existingItem.quantity += 1;
+    } else {
+        // Add new item to the cart
+        cart.push({
+            itemName: itemName, // Ensure this is correctly defined
+            price: price,
+            quantity: 1
+        });
+    }
+    
+    // Save the updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update cart count
+    updateCartCount();
+}
+
+
+  // Function to update the cart count displayed
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById('cartCount').innerText = cartCount;
+  }
+
+  // Run this function when the page loads to set the initial cart count
+  window.onload = updateCartCount;
+
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+    } else {
+        answer.style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>

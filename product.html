@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Shoes E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+header {
+    display: flex;
+    justify-content: center; /* Center everything horizontally */
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position .actions absolutely */
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+header .actions {
+    position: absolute; /* Place it independently from the logo */
+    right: 20px; /* Align it to the right of the header */
+    display: flex;
+    gap: 5px;
+}
+        header .actions img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        header .actions img:hover {
+            transform: scale(1.2);
+        }
+nav {
+  background-color: #333;
+  padding: 10px 0;
+  text-align: center;
+  position: relative; /* Necessary for dropdown positioning */
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Ensures menu items are in one line */
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul li {
+  position: relative; /* For dropdown positioning */
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 15px; /* Adds padding for clickable area */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #e74c3c;
+}
+
+nav ul li .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the parent menu */
+  left: 0;
+  background-color: #444; /* Matches overall design */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 5px 0; /* Adds spacing inside dropdown */
+  margin: 0;
+  z-index: 1000;
+  border-radius: 5px; /* Smooth edges */
+}
+
+nav ul li .dropdown li {
+  width: 180px; /* Adjust for consistent dropdown size */
+}
+
+nav ul li .dropdown li a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  color: white;
+  background-color: #444; /* Matches dropdown background */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li:hover .dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+nav ul li .dropdown li a:hover {
+  background-color: #555; /* Slightly lighter for hover effect */
+  color: #e74c3c;
+}
+
+
+        .header-slider {
+            position: relative;
+            overflow: hidden;
+            height: 400px; /* Set a specific height to make sure it fits */
+            margin-top: 0px; /* Adds space between the header and the slider */
+        }
+
+        .header-slider img {
+            width: 100%;
+            height: 100%; /* Ensure the image takes up the full height of the slider */
+            object-fit: cover;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .header-slider img.active {
+            display: block;
+            opacity: 1;
+        }
+
+
+        .brand-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 products per row */
+            gap: 20px;
+            justify-items: center;
+            margin: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            width: 200px; /* fixed width for square box */
+            height: 300px; /* fixed height to make it a square box */
+            padding: 10px;
+            text-align: center;
+            box-sizing: border-box;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            width: 100%;
+            height: 150px; /* Adjust for image height */
+            object-fit: cover;
+        }
+
+        .product button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .product button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .brands {
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .brands img {
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .brands img:hover {
+            transform: scale(1.2);
+        }
+
+    /* Style for the actions div to hold the items in line */
+    .actions {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Container for the cart icon and the count */
+    .cart-container {
+        position: relative;
+    }
+
+    /* Style for the cart count */
+    .cart-count {
+        position: absolute;
+        top:-15px; /* Adjust top for positioning */
+        right: 30px; /* Adjust right for positioning */
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 14px;
+        width: 10px;
+        height: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        footer {
+            background-color: #f4f4f4;
+            padding: 20px 40px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h4 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-section p {
+            cursor: pointer;
+            margin: 5px 0;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .footer-section .answer {
+            display: none;
+            margin-left: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .footer-bottom a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .payment-methods img {
+            width: 40px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="image/logo2.svg" alt="SportShoes Logo" style="width: 100px; height: auto;">
+    </div>
+    <div class="actions">
+        <!-- Search Button -->
+        <img src="image/6.svg" alt="Search" onclick="alert('Search functionality coming soon!')">
+
+        <!-- Cart Button with Item Count -->
+        <a href="cart.html">
+            <img src="image/5.svg" alt="Cart" id="cartButton">
+            <span id="cartCount" class="cart-count">0</span>
+        </a>
+
+        <!-- Like Button -->
+        <img src="image/7.svg" alt="Like" id="likeButton">
+    </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown-menu">
+      <a href="product.html">Products</a> <!-- Link to the product page -->
+      <ul class="dropdown">
+        <li><a href="product.html#asics">Asics</a></li>
+        <li><a href="product.html#puma">Puma</a></li>
+        <li><a href="product.html#newbalance">New Balance</a></li>
+        <li><a href="product.html#lacoste">Lacoste</a></li>
+        <li><a href="product.html#skechers">Skechers</a></li>
+      </ul>
+    </li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+</nav>
+
+
+
+<div class="header-slider">
+    <img src="image/4.svg" alt="Header 1" class="active">
+    <img src="image/2.svg" alt="Header 2">
+    <img src="image/3.svg" alt="Header 3">
+</div>
+
+<div class="brands">
+    <img src="image/asics TB.svg" alt="Asics" onclick="location.href='product.html#asics'">
+    <img src="image/puma TB.svg" alt="Puma" onclick="location.href='product.html#puma'">
+    <img src="image/new balance TB.svg" alt="New Balance" onclick="location.href='product.html#newbalance'">
+    <img src="image/lacoste TB.svg" alt="Lacoste" onclick="location.href='product.html#lacoste'">
+    <img src="image/skechers TB.svg" alt="Skechers" onclick="location.href='product.html#skechers'">
+</div>
+
+<!-- Brand Sections -->
+<div class="brand-section" id="asics">
+    <h2>Asics</h2>
+    <div class="product-container" id="asics-products"></div>
+</div>
+
+<div class="brand-section" id="puma">
+    <h2>Puma</h2>
+    <div class="product-container" id="puma-products"></div>
+</div>
+
+<div class="brand-section" id="newbalance">
+    <h2>New Balance</h2>
+    <div class="product-container" id="newbalance-products"></div>
+</div>
+
+<div class="brand-section" id="lacoste">
+    <h2>Lacoste</h2>
+    <div class="product-container" id="lacoste-products"></div>
+</div>
+
+<div class="brand-section" id="skechers">
+    <h2>Skechers</h2>
+    <div class="product-container" id="skechers-products"></div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Shopping with KICKX</h4>
+            <p onclick="toggleAnswer(this)">How Do I Buy?</p>
+            <p class="answer">To buy, add items to your cart and proceed to checkout.</p>
+            <p onclick="toggleAnswer(this)">Delivery & Charges</p>
+            <p class="answer">We deliver within 3-5 business days. Charges may vary.</p>
+            <p onclick="toggleAnswer(this)">Size Guides</p>
+            <p class="answer">Refer to our size chart for detailed measurements.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Care</h4>
+            <p onclick="toggleAnswer(this)">Returns & Exchange</p>
+            <p class="answer">Items can be returned within 30 days of purchase.</p>
+            <p onclick="toggleAnswer(this)">Contact Us</p>
+            <p class="answer">Reach us via email or phone for support.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <p onclick="toggleAnswer(this)">Terms & Conditions</p>
+            <p class="answer">Review our terms and conditions for purchases.</p>
+            <p onclick="toggleAnswer(this)">Privacy & Cookies</p>
+            <p class="answer">Learn how we handle your data and cookies.</p>
+            <p onclick="toggleAnswer(this)">Accessibility</p>
+            <p class="answer">Our commitment to accessible services.</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright © 2025 KICKX Sdn Bhd. All rights reserved.</p>
+        <div class="payment-methods">
+            <span>We accept the following payment methods:</span>
+            <img src="image/16.svg" alt="Visa">
+            <img src="image/17.svg" alt="Mastercards">
+        </div>
+    </div>
+</footer>
+
+<script>
+
+    let activeIndex = 0;
+    const images = document.querySelectorAll('.header-slider img');
+    
+    function changeImage() {
+        images[activeIndex].classList.remove('active');
+        activeIndex = (activeIndex + 1) % images.length;
+        images[activeIndex].classList.add('active');
+    }
+    
+    setInterval(changeImage, 3000); // Change image every 3 seconds
+
+    function addToCart(product) {
+        alert(product + ' added to cart!');
+    }
+
+    let cartCount = 0;
+
+    // Function to add an item to the cart and update the count
+    function addToCart() {
+        cartCount++;  // Increment the cart count
+        document.getElementById("cartCount").innerText = cartCount; // Update the count next to the cart icon
+    }
+
+
+    function addToFavorites(product) {
+        alert(product + ' added to favorites!');
+    }
+
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+    } else {
+        answer.style.display = "block";
+    }
+}
+
+    // Sample product data for the asics brand
+const products = {
+    asics: [
+        {name: "Asics Japan S", image: "image/asics d1.svg", link: "detail.html?id=1"},
+        {name: "Asics Japan S 2", image: "image/asics d6.svg", link: "detail.html?id=2"},
+        {name: "Asics Japan S 3", image: "image/9.svg", link: "detail.html?id=3"},
+        {name: "Asics JAPAN S PF", image: "image/10.svg", link: "detail.html?id=4"},
+        {name: "Asics Tiger Classic CT", image: "image/asics5.svg", link: "detail.html?id=5"},
+        {name: "Asics JAPAN S PF", image: "image/asics6.svg", link: "detail.html?id=6"},
+        {name: "Asics Tiger Classic CT", image: "image/asics7.svg", link: "detail.html?id=7"}
+    ],
+
+    puma: [
+        {name: "Puma Cali Star", image: "image/pumad.svg", link: "detail.html?id=8"},
+        {name: "Puma Cali Dream Lth", image: "image/30.svg", link: "detail.html?id=9"},
+        {name: "Puma -180", image: "image/35.svg", link: "detail.html?id=10"},
+        {name: "Puma Mayze Mix", image: "image/40.svg", link: "detail.html?id=11"},
+        {name: "Puma Mayze Slam Ld41", image: "image/45.svg", link: "detail.html?id=12"},
+        {name: "Puma Cali Court Embroidery", image: "image/50.svg", link: "detail.html?id=13"},
+        {name: "Puma Carina Treet Sneakers", image: "image/55.svg", link: "detail.html?id=14"},
+    ],
+
+    newbalance: [
+        {name: "New Balance 990v5", image: "image/newb1.svg", link: "detail.html?id=15"},
+        {name: "New Balance 574", image: "image/newb2.svg", link: "detail.html?id=16"},
+        {name: "New Balance 327", image: "image/newb3.svg", link: "detail.html?id=17"},
+        {name: "New Balance 860v11", image: "image/newb4.svg", link: "detail.html?id=18"},
+        {name: "New Balance 327V1", image: "image/newb5.svg", link: "detail.html?id=19"},
+        {name: "New Balance 574", image: "image/newb6.svg", link: "detail.html?id=20"},
+        {name: "New Balance Fresh", image: "image/newb7.svg", link: "detail.html?id=21"},
+        {name: "New Balance 860v11", image: "image/newb8.svg", link: "detail.html?id=22"},
+        {name: "New Balance 990v5", image: "image/newb9.svg", link: "detail.html?id=23"},
+        {name: "New Balance 574", image: "image/newb10.svg", link: "detail.html?id=24"},
+    ],
+
+    lacoste: [
+        {name: "Low Top Trainers", image: "image/lacosted1.svg", link: "detail.html?id=25"},
+        {name: "L002 EVO Leather", image: "image/lacosted2.svg", link: "detail.html?id=26"},
+        {name: "Court Sneaker", image: "image/lacosted3.svg", link: "detail.html?id=27"},
+        {name: "L004 Blanc", image: "image/lacosted4.svg", link: "detail.html?id=28"},
+        {name: "Court Sneaker", image: "image/lacosted5.svg", link: "detail.html?id=29"},
+        {name: "L002 EVO Leather", image: "image/lacosted6.svg", link: "detail.html?id=30"},
+        {name: "Lacoste Carnaby Evo", image: "image/lacosted7.svg", link: "detail.html?id=31"},
+        {name: "Lacoste Trainers", image: "image/lacosted8.svg", link: "detail.html?id=32"},
+        {name: "Lacoste Basic Sneakers", image: "image/lacosted9.svg", link: "detail.html?id=33"},
+        {name: "Lacoste L.12.12", image: "image/lacoste10.svg", link: "detail.html?id=34"},
+    ],
+
+    skechers: [
+        {name: "Skechers D'lites", image: "image/skc1.svg", link: "detail.html?id=35"},
+        {name: "Skechers D'lites", image: "image/skc2.svg", link: "detail.html?id=36"},
+        {name: "Skechers D'lites", image: "image/skc3.svg", link: "detail.html?id=37"},
+        {name: "Skechers Go Walk 5", image: "image/skc4.svg", link: "detail.html?id=38"},
+        {name: "Skechers Mens UNO", image: "image/skc5.svg", link: "detail.html?id=39"},
+        {name: "Skechers Tres-Air UNO", image: "image/skc6.svg", link: "detail.html?id=40"},
+        {name: "Skechers Go Walk 5", image: "image/skc7.svg", link: "detail.html?id=41"},
+        {name: "Skechers D'lites", image: "image/skc8.svg", link: "detail.html?id=42"},
+        {name: "Skechers Arch Fit", image: "image/skc9.svg", link: "detail.html?id=43"},
+        {name: "Skechers Mens UNO", image: "image/skc10.svg", link: "detail.html?id=44"},
+    ]
+};
+
+
+    function loadProducts(brand) {
+        const container = document.getElementById(`${brand}-products`);
+        products[brand].forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h4>${product.name}</h4>
+                <a href="${product.link}">
+                    <img src="image/vdt.svg" alt="View Details" style="width: 100px; height: auto; cursor: pointer;">
+                </a>
+            `;
+            container.appendChild(productElement);
+        });
+    }
+
+    // Load products for each brand
+    loadProducts('asics');
+    loadProducts('puma');
+    loadProducts('newbalance');
+    loadProducts('lacoste');
+    loadProducts('skechers');
+
+
+</script>
+
+</body>
+</html>
+
+

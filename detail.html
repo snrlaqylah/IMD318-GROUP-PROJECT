@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Shoes E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+header {
+    display: flex;
+    justify-content: center; /* Center everything horizontally */
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position .actions absolutely */
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+header .actions {
+    position: absolute; /* Place it independently from the logo */
+    right: 20px; /* Align it to the right of the header */
+    display: flex;
+    gap: 5px;
+}
+        header .actions img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        header .actions img:hover {
+            transform: scale(1.2);
+        }
+nav {
+  background-color: #333;
+  padding: 10px 0;
+  text-align: center;
+  position: relative; /* Necessary for dropdown positioning */
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Ensures menu items are in one line */
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul li {
+  position: relative; /* For dropdown positioning */
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 15px; /* Adds padding for clickable area */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #e74c3c;
+}
+
+nav ul li .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the parent menu */
+  left: 0;
+  background-color: #444; /* Matches overall design */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 5px 0; /* Adds spacing inside dropdown */
+  margin: 0;
+  z-index: 1000;
+  border-radius: 5px; /* Smooth edges */
+}
+
+nav ul li .dropdown li {
+  width: 180px; /* Adjust for consistent dropdown size */
+}
+
+nav ul li .dropdown li a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  color: white;
+  background-color: #444; /* Matches dropdown background */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li:hover .dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+nav ul li .dropdown li a:hover {
+  background-color: #555; /* Slightly lighter for hover effect */
+  color: #e74c3c;
+}
+
+
+    /* Style for the actions div to hold the items in line */
+    .actions {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Container for the cart icon and the count */
+    .cart-container {
+        position: relative;
+    }
+
+    /* Style for the cart count */
+    .cart-count {
+        position: absolute;
+        top:-15px; /* Adjust top for positioning */
+        right: 30px; /* Adjust right for positioning */
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 14px;
+        width: 10px;
+        height: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .product-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+.product-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 20px; /* Add this line to create space between the product section and the nav */
+}
+
+        .product-images {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .image-box {
+            width: 100%;
+            max-width: 350px;
+            height: 350px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: #f4f4f4;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .thumbnails img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .thumbnails img:hover {
+            border-color: #000;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .product-info .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quantity label {
+            font-size: 16px;
+        }
+
+        .quantity input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .buttons button:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+
+.additional-images {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px; /* Space between main image and additional images */
+}
+
+.additional-image {
+    text-align: center;
+}
+
+.additional-image img {
+    width: 150px; /* Keep the width at 100px */
+    height: 150px; /* Keep the height at 100px */
+    object-fit: cover; /* Maintain aspect ratio */
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.additional-image p {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+        .related-products {
+            margin-top: 40px;
+        }
+
+        .related-products h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .related-items {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .related-item {
+            width: 200px;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .related-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .related-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+footer {
+    background-color: #f4f4f4;
+    padding: 20px 40px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    cursor: pointer;
+    margin: 5px 0;
+    font-size: 14px;
+    color: #000;
+}
+
+.footer-section .answer {
+    display: none;
+    margin-left: 15px;
+    font-size: 13px;
+    color: #555;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-bottom a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.payment-methods img {
+    width: 40px;
+    height: auto;
+}
+
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="image/logo2.svg" alt="SportShoes Logo" style="width: 100px; height: auto;">
+    </div>
+    <div class="actions">
+        <!-- Search Button -->
+        <img src="image/6.svg" alt="Search" onclick="alert('Search functionality coming soon!')">
+
+        <!-- Cart Button with Item Count -->
+        <a href="cart.html">
+            <img src="image/5.svg" alt="Cart" id="cartButton">
+            <span id="cartCount" class="cart-count">0</span>
+        </a>
+
+        <!-- Like Button -->
+        <img src="image/7.svg" alt="Like" id="likeButton">
+    </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown-menu">
+      <a href="product.html">Products</a> <!-- Link to the product page -->
+      <ul class="dropdown">
+        <li><a href="product.html#asics">Asics</a></li>
+        <li><a href="product.html#puma">Puma</a></li>
+        <li><a href="product.html#newbalance">New Balance</a></li>
+        <li><a href="product.html#lacoste">Lacoste</a></li>
+        <li><a href="product.html#skechers">Skechers</a></li>
+      </ul>
+    </li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+</nav>
+
+<div class="product-section">
+    <!-- Product Images -->
+    <div class="product-images">
+        <div class="image-box" id="image-box">
+            <!-- Main product image -->
+            <img id="main-image" src="" alt="Product Image">
+        </div>
+        <div class="thumbnails" id="thumbnails">
+            <!-- Thumbnails will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Product Information -->
+    <div class="product-info">
+        <h1 id="1"></h1>
+        <p id="product-description"></p>
+        <p class="price" id="product-price"></p>
+
+        <!-- Quantity Selector -->
+        <div class="quantity">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" value="1" min="1">
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button onclick="addToCart()">Add to Cart</button>
+            <button onclick="addToFavorites()">Add to Favorites</button>
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Shopping with KICKX</h4>
+            <p onclick="toggleAnswer(this)">How Do I Buy?</p>
+            <p class="answer">To buy, add items to your cart and proceed to checkout.</p>
+            <p onclick="toggleAnswer(this)">Delivery & Charges</p>
+            <p class="answer">We deliver within 3-5 business days. Charges may vary.</p>
+            <p onclick="toggleAnswer(this)">Size Guides</p>
+            <p class="answer">Refer to our size chart for detailed measurements.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Care</h4>
+            <p onclick="toggleAnswer(this)">Returns & Exchange</p>
+            <p class="answer">Items can be returned within 30 days of purchase.</p>
+            <p onclick="toggleAnswer(this)">Contact Us</p>
+            <p class="answer">Reach us via email or phone for support.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <p onclick="toggleAnswer(this)">Terms & Conditions</p>
+            <p class="answer">Review our terms and conditions for purchases.</p>
+            <p onclick="toggleAnswer(this)">Privacy & Cookies</p>
+            <p class="answer">Learn how we handle your data and cookies.</p>
+            <p onclick="toggleAnswer(this)">Accessibility</p>
+            <p class="answer">Our commitment to accessible services.</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright © 2025 KICKX Sdn Bhd. All rights reserved.</p>
+        <div class="payment-methods">
+            <span>We accept the following payment methods:</span>
+            <img src="image/16.svg" alt="Visa">
+            <img src="image/17.svg" alt="Mastercards">
+        </div>
+    </div>
+</footer>
+
+<script>
+// Array to store multiple product details
+
+const products = [
+    {
+        id: 1,
+        name: "Asics Japan S",
+        description: "Superior comfort and stability for runners.",
+        price: "$150",
+        mainImage: "image/asics d1.svg",
+        additionalImages: [
+            { src: "image/d4.svg", alt: "Front View", label: "Front View" },
+            { src: "image/d3.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/d2.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/d5.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 2,
+        name: "Asics Japan S 2",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/asics d6.svg",
+        additionalImages: [
+            { src: "image/d9.svg", alt: "Front View", label: "Front View" },
+            { src: "image/d8.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/d7.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/d10.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 3,
+        name: "Asics Japan S 3",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/asics d11.svg",
+        additionalImages: [
+            { src: "image/24.svg", alt: "Front View", label: "Front View" },
+            { src: "image/23.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/a3r.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/25.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 4,
+        name: "Asics JAPAN S PF",
+        description: "Engineered for speed and comfort.",
+        price: "$180",
+        mainImage: "image/26.svg",
+        additionalImages: [
+            { src: "image/29.svg", alt: "Front View", label: "Front View" },
+            { src: "image/28.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/27.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/a4b.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 5,
+        name: "Asics Tiger Classic CT",
+        description: "Engineered for speed and comfort.",
+        price: "$200",
+        mainImage: "image/asics5.svg",
+        additionalImages: [
+            { src: "image/a51.svg", alt: "Front View", label: "Front View" },
+            { src: "image/a52.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/a53.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/a54.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 6,
+        name: "Asics JAPAN S PF",
+        description: "Engineered for speed and comfort.",
+        price: "$180",
+        mainImage: "image/asics6.svg",
+        additionalImages: [
+            { src: "image/a61.svg", alt: "Front View", label: "Front View" },
+            { src: "image/a62.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/a63.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/a64.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 7,
+        name: "Asics Tiger Classic CT",
+        description: "Engineered for speed and comfort.",
+        price: "$200",
+        mainImage: "image/asics7.svg",
+        additionalImages: [
+            { src: "image/a71.svg", alt: "Front View", label: "Front View" },
+            { src: "image/a72.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/a73.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/a74.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 8,
+        name: "Puma Cali Star",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/pumad.svg",
+        additionalImages: [
+            { src: "image/puma1f.svg", alt: "Front View", label: "Front View" },
+            { src: "image/puma1l.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/puma1r.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/puma1b.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 9,
+        name: "Puma Cali Dream Lth",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/30.svg",
+        additionalImages: [
+            { src: "image/puma2f.svg", alt: "Front View", label: "Front View" },
+            { src: "image/puma2l.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/puma2r.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/puma2b.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 10,
+        name: "Puma -180",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/35.svg",
+        additionalImages: [
+            { src: "image/38.svg", alt: "Front View", label: "Front View" },
+            { src: "image/37.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/36.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/39.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 11,
+        name: "Puma Mayze Mix",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/40.svg",
+        additionalImages: [
+            { src: "image/43.svg", alt: "Front View", label: "Front View" },
+            { src: "image/42.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/41.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/44.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 12,
+        name: "Puma Mayze Slam Ld41",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/45.svg",
+        additionalImages: [
+            { src: "image/48.svg", alt: "Front View", label: "Front View" },
+            { src: "image/47.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/46.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/49.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 13,
+        name: "Puma Cali Court Embroidery",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/50.svg",
+        additionalImages: [
+            { src: "image/53.svg", alt: "Front View", label: "Front View" },
+            { src: "image/52.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/51.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/54.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 14,
+        name: "Puma Carina Treet Sneakers",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/55.svg",
+        additionalImages: [
+            { src: "image/58.svg", alt: "Front View", label: "Front View" },
+            { src: "image/57.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/56.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/59.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 15,
+        name: "New Balance 990v5",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/newb1.svg",
+        additionalImages: [
+            { src: "image/nb1.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb2.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb3.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb4.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 16,
+        name: "New Balance 574",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/newb2.svg",
+        additionalImages: [
+            { src: "image/nb21.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb22.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb23.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb24.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 17,
+        name: "New Balance 327",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/newb3.svg",
+        additionalImages: [
+            { src: "image/nb31.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb32.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb33.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb34.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 18,
+        name: "New Balance 860v11",
+        description: "Engineered for speed and comfort.",
+        price: "$160",
+        mainImage: "image/newb4.svg",
+        additionalImages: [
+            { src: "image/nb41.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb42.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb43.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb44.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 19,
+        name: "New Balance 327V1",
+        description: "Superior comfort and stability for runners.",
+        price: "$250",
+        mainImage: "image/newb5.svg",
+        additionalImages: [
+            { src: "image/nb51.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb52.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb53.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb54.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 20,
+        name: "New Balance 574",
+        description: "Engineered for speed and comfort.",
+        price: "$180",
+        mainImage: "image/newb6.svg",
+        additionalImages: [
+            { src: "image/nb61.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb62.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb63.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb64.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 21,
+        name: "New Balance Fresh",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/newb7.svg",
+        additionalImages: [
+            { src: "image/nb71.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb72.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb73.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb74.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 22,
+        name: "New Balance 860v11",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/newb8.svg",
+        additionalImages: [
+            { src: "image/nb81.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb82.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb83.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb84.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 23,
+        name: "New Balance 990v5",
+        description: "Engineered for speed and comfort.",
+        price: "$120",
+        mainImage: "image/newb9.svg",
+        additionalImages: [
+            { src: "image/nb91.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb92.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb93.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb94.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 24,
+        name: "New Balance 574",
+        description: "Engineered for speed and comfort.",
+        price: "$120",
+        mainImage: "image/newb10.svg",
+        additionalImages: [
+            { src: "image/nb101.svg", alt: "Front View", label: "Front View" },
+            { src: "image/nb102.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/nb103.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/nb104.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 25,
+        name: "Low Top Trainers",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/lacosted1.svg",
+        additionalImages: [
+            { src: "image/l3.svg", alt: "Front View", label: "Front View" },
+            { src: "image/l2.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/l1.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/l4.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 26,
+        name: "L002 EVO Leather",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/lacosted2.svg",
+        additionalImages: [
+            { src: "image/l7.svg", alt: "Front View", label: "Front View" },
+            { src: "image/l6.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/l5.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/l8.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 27,
+        name: "Court Sneaker",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/lacosted3.svg",
+        additionalImages: [
+            { src: "image/l11.svg", alt: "Front View", label: "Front View" },
+            { src: "image/l10.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/l9.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/l12.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 28,
+        name: "L004 Blanc",
+        description: "Engineered for speed and comfort.",
+        price: "$160",
+        mainImage: "image/lacosted4.svg",
+        additionalImages: [
+            { src: "image/l15.svg", alt: "Front View", label: "Front View" },
+            { src: "image/l14.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/l13.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/l16.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 29,
+        name: "Court Sneaker",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/lacosted5.svg",
+        additionalImages: [
+            { src: "image/l19.svg", alt: "Front View", label: "Front View" },
+            { src: "image/l18.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/l17.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/l20.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 30,
+        name: "L002 EVO Leather",
+        description: "Engineered for speed and comfort.",
+        price: "$180",
+        mainImage: "image/lacosted6.svg",
+        additionalImages: [
+            { src: "image/l23.svg", alt: "Front View", label: "Front View" },
+            { src: "image/l22.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/l21.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/l24.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 31,
+        name: "Lacoste Carnaby Evo",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/lacosted7.svg",
+        additionalImages: [
+            { src: "image/lacoste7a.svg", alt: "Front View", label: "Front View" },
+            { src: "image/lacoste7b.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/lacoste7c.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/lacoste7d.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 32,
+        name: "Lacoste Trainers",
+        description: "Engineered for speed and comfort.",
+        price: "$200",
+        mainImage: "image/lacosted8.svg",
+        additionalImages: [
+            { src: "image/lacoste8a.svg", alt: "Front View", label: "Front View" },
+            { src: "image/lacoste8b.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/lacoste8c.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/lacoste8d.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 33,
+        name: "Lacoste Basic Sneakers",
+        description: "Engineered for speed and comfort.",
+        price: "$170",
+        mainImage: "image/lacosted9.svg",
+        additionalImages: [
+            { src: "image/lacoste9a.svg", alt: "Front View", label: "Front View" },
+            { src: "image/lacoste9b.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/lacoste9c.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/lacoste9d.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 34,
+        name: "Lacoste L.12.12",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/lacoste10.svg",
+        additionalImages: [
+            { src: "image/lacoste10c.svg", alt: "Front View", label: "Front View" },
+            { src: "image/lacoste10a.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/lacoste10b.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/lacoste10d.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 35,
+        name: "Skechers D'lites",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/skc1.svg",
+        additionalImages: [
+            { src: "image/sk3.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk2.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk1.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk4.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 36,
+        name: "Skechers D'lites",
+        description: "Engineered for speed and comfort.",
+        price: "$120",
+        mainImage: "image/skc2.svg",
+        additionalImages: [
+            { src: "image/sk7.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk6.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk5.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk8.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 37,
+        name: "Skechers D'lites",
+        description: "Superior comfort and stability for runners.",
+        price: "$170",
+        mainImage: "image/skc3.svg",
+        additionalImages: [
+            { src: "image/sk11.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk10.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk9.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk12.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 38,
+        name: "Skechers Go Walk 5",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/skc4.svg",
+        additionalImages: [
+            { src: "image/sk15.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk14.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk13.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk16.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 39,
+        name: "Skechers Mens UNO",
+        description: "Engineered for speed and comfort.",
+        price: "$200",
+        mainImage: "image/skc5.svg",
+        additionalImages: [
+            { src: "image/sk19.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk18.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk17.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk20.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 40,
+        name: "Skechers Tres-Air UNO",
+        description: "Engineered for speed and comfort.",
+        price: "$180",
+        mainImage: "image/skc6.svg",
+        additionalImages: [
+            { src: "image/sk23.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk22.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk21.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk24.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 41,
+        name: "Skechers Go Walk 5",
+        description: "Engineered for speed and comfort.",
+        price: "$130",
+        mainImage: "image/skc7.svg",
+        additionalImages: [
+            { src: "image/sk27.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk26.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk25.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk28.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 42,
+        name: "Skechers D'lites",
+        description: "Engineered for speed and comfort.",
+        price: "$120",
+        mainImage: "image/skc8.svg",
+        additionalImages: [
+            { src: "image/sk31.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk30.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk29.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk32.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 43,
+        name: "Skechers Arch Fit",
+        description: "Engineered for speed and comfort.",
+        price: "$180",
+        mainImage: "image/skc9.svg",
+        additionalImages: [
+            { src: "image/sk35.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk34.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk33.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk36.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+    {
+        id: 44,
+        name: "Skechers Mens UNO",
+        description: "Engineered for speed and comfort.",
+        price: "$150",
+        mainImage: "image/skc10.svg",
+        additionalImages: [
+            { src: "image/sk39.svg", alt: "Front View", label: "Front View" },
+            { src: "image/sk38.svg", alt: "Left Side View", label: "Left Side View" },
+            { src: "image/sk37.svg", alt: "Right Side View", label: "Right Side View" },
+            { src: "image/sk40.svg", alt: "Back View", label: "Back View" }
+        ]
+    },
+
+
+];
+
+function getProductIdFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return parseInt(params.get("id")); // Convert the id to a number
+}
+
+
+function displayProductDetails() {
+    const productId = getProductIdFromURL();
+    const product = products.find(p => p.id === productId);
+
+    if (product) {
+        // Update main product details
+        document.getElementById("main-image").src = product.mainImage;
+        document.getElementById("main-image").alt = product.name;
+
+        document.getElementById("1").textContent = product.name;
+        document.getElementById("product-description").textContent = product.description;
+        document.getElementById("product-price").textContent = product.price;
+
+        // Update additional images
+        const thumbnailsContainer = document.getElementById("thumbnails");
+        thumbnailsContainer.innerHTML = ""; // Clear existing thumbnails
+
+        product.additionalImages.forEach(image => {
+            const thumbnail = document.createElement("div");
+            thumbnail.classList.add("additional-image");
+
+            const img = document.createElement("img");
+            img.src = image.src;
+            img.alt = image.alt;
+
+            const label = document.createElement("p");
+            label.textContent = image.label;
+
+            thumbnail.appendChild(img);
+            thumbnail.appendChild(label);
+            thumbnailsContainer.appendChild(thumbnail);
+        });
+    } else {
+        console.error("Product not found!");
+    }
+}
+
+// Call the function on page load
+document.addEventListener("DOMContentLoaded", displayProductDetails);
+
+    function addToCart(productName) {
+        cartCount++;  // Increment the cart count
+        document.getElementById('cartCount').textContent = cartCount;  // Update cart count in the header
+        alert('Item has been added to cart!');    }
+
+    function addToFavorites(productName) {
+        // Your favorite functionality
+        console.log(productName + " added to favorites!");
+    }
+
+     let cartCount = 0;  // Initialize cart count variable
+
+    // Function to add items to the cart and update the cart count
+    function addToCart() {
+        cartCount++;  // Increment the cart count
+        document.getElementById('cartCount').textContent = cartCount;  // Update cart count in the header
+        alert('Item has been added to cart!');
+    }
+
+// Initialize an empty cart array
+let cart = [];
+
+function addToCart(itemName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Check if the item already exists in the cart
+    const existingItem = cart.find(item => item.itemName === itemName);
+    
+    if (existingItem) {
+        // Increase the quantity if the item is already in the cart
+        existingItem.quantity += 1;
+    } else {
+        // Add new item to the cart
+        cart.push({
+            itemName: itemName, // Ensure this is correctly defined
+            price: price,
+            quantity: 1
+        });
+    }
+    
+    // Save the updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update cart count
+    updateCartCount();
+}
+
+
+  // Function to update the cart count displayed
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById('cartCount').innerText = cartCount;
+  }
+
+  // Run this function when the page loads to set the initial cart count
+  window.onload = updateCartCount;
+
+</script>
+
+</body>
+</html>
